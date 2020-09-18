@@ -2,7 +2,10 @@ $(document).ready(function () {
 
     // Display current date and hour
     $("#currentDay").text(moment().format("dddd, MMMM Do"));
-    var currentHour = moment().format("k");
+    var currentHour = 0;
+    setInterval(function() {
+        currentHour = moment().format("k");
+    }, 10000) 
 
     // In a for loop, create one row. time: 9-17 
 
@@ -29,7 +32,8 @@ $(document).ready(function () {
         $(".container").append(newRow);
 
     }
-    console.log("#btn" + currentHour);
+
+    // console.log("#btn" + currentHour);
     if (currentHour >= 9) {
         $(".container").find("#btn" + currentHour).prev().css("background-color", "#EED5D2");
         for (var j = 9; j < currentHour; j++) {
@@ -42,23 +46,9 @@ $(document).ready(function () {
     } else {
         $("textarea").css("background-color", "#CFDBC5"); 
     }
-    
-    // function saveText(targetId) {
-    //     var buttonClicked = "#" + targetId;
-    //     localStorage.setItem(targetId, $(buttonClicked).prev().val());
-
-    //     // console.log($(buttonClicked));
-    //     // console.log($(buttonClicked).prev().val());
-    //     // var inputText = JSON.parse(localStorage.getItem($(buttonClicked).prev().val()));
-    //     // var inputText = localStorage.getItem($(buttonClicked).prev().val());
-    //     // console.log(inputText);
-
-    //     // var inputText = $(buttonClicked).prev().val();
-    //     // localStorage.setItem(targetId, inputText);
-    // }
 
     // Check whether it's a button being clicked
-    function check(event) {
+    function saveText(event) {
         event.preventDefault();
 
         if ($(event.target).is("button")) {
@@ -69,7 +59,7 @@ $(document).ready(function () {
         }
     }
 
-    $(this).on("click", check);
+    $(this).on("click", saveText);
 
 });
 
