@@ -1,7 +1,8 @@
 $(document).ready(function () {
 
-    // Display current date
+    // Display current date and hour
     $("#currentDay").text(moment().format("dddd, MMMM Do"));
+    var currentHour = moment().format("k");
 
     // In a for loop, create one row. time: 9-17 
 
@@ -28,31 +29,47 @@ $(document).ready(function () {
         $(".container").append(newRow);
 
     }
+    console.log("#btn" + currentHour);
+    if (currentHour >= 9) {
+        $(".container").find("#btn" + currentHour).prev().css("background-color", "#EED5D2");
+        for (var j = 9; j < currentHour; j++) {
+            $("#btn" + j).prev().css("background-color", "#EBEBEB");
+        }
+    
+        for (var k = currentHour + 1; k <= 17; k++) {
+            $("#btn" + k).prev().css("background-color", "#CFDBC5");
+        }
+    } else {
+        $("textarea").css("background-color", "#CFDBC5"); 
+    }
+    
+    // function saveText(targetId) {
+    //     var buttonClicked = "#" + targetId;
+    //     localStorage.setItem(targetId, $(buttonClicked).prev().val());
+
+    //     // console.log($(buttonClicked));
+    //     // console.log($(buttonClicked).prev().val());
+    //     // var inputText = JSON.parse(localStorage.getItem($(buttonClicked).prev().val()));
+    //     // var inputText = localStorage.getItem($(buttonClicked).prev().val());
+    //     // console.log(inputText);
+
+    //     // var inputText = $(buttonClicked).prev().val();
+    //     // localStorage.setItem(targetId, inputText);
+    // }
 
     // Check whether it's a button being clicked
-    $(this).on("click", function(event) {
-
+    function check(event) {
         event.preventDefault();
 
         if ($(event.target).is("button")) {
             // console.log(event.target.id);
-            saveText(event.target.id);
+            // saveText(event.target.id);
+            var buttonClicked = "#" + event.target.id;
+            localStorage.setItem(event.target.id, $(buttonClicked).prev().val());
         }
-
-    });
-
-    function saveText(targetId) {
-        // var buttonClicked = "#" + targetId;
-        // console.log($(buttonClicked));
-        // console.log($(buttonClicked).siblings("textarea").text());
-        // var inputText = JSON.parse(localStorage.getItem($(buttonClicked).siblings("textarea").text()));
-        // localStorage.setItem(targetId, JSON.stringify(inputText));
-
-        // var inputText = $(buttonClicked).siblings("textarea").text();
-        // localStorage.setItem(targetId, inputText);
     }
-    // for(var j = 0; j <= 17; j++) {
-    //     $("#")
-    // }
+
+    $(this).on("click", check);
+
 });
 
