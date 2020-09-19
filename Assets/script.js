@@ -66,20 +66,17 @@ $(document).ready(function () {
         // Make sure only clicking on a button can trigger the event
         if ($(event.target).is("button") || $(event.target).is("i")) {
 
-            var arrayText = [];
             var inputText = "";
             var numBtn = event.target.id.split("n")[1]; // Get the number in the id
             var buttonClicked = "btn" + numBtn; // Form button id
 
-            arrayText = JSON.parse(localStorage.getItem(buttonClicked)) || [];
             inputText = $("#" + buttonClicked).prev().val(); // Get user input
 
             // Make sure input is not empty
             if (inputText) {
 
-                // Add input to array then save to local storage
-                arrayText.push(inputText);
-                localStorage.setItem(buttonClicked, JSON.stringify(arrayText));
+                // Save input to local storage
+                localStorage.setItem(buttonClicked, JSON.stringify(inputText));
 
                 // Display updated text in textarea
                 var displayArray = JSON.parse(localStorage.getItem(buttonClicked));
