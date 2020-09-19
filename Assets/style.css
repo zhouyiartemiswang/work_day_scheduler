@@ -20,6 +20,12 @@ textarea{
     border-radius: 0;
     border-bottom: 10px solid black;
 }
+.display-3 {
+    line-height: 1.5;
+}
+.lead {
+    margin-top: 1vw;
+}
 
 .description{
     white-space: pre-wrap;
