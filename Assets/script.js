@@ -52,46 +52,34 @@ $(document).ready(function () {
         $("textarea").css("background-color", "#CFDBC5"); //pale green
     }
 
-    // localStorage.getItem()
     // Check whether it's a button being clicked
     function saveText(event) {
         event.preventDefault();
         
         // console.log($(event.target).is("i"));
         if ($(event.target).is("button") || $(event.target).is("i")) {
+            
             var arrayText = [];
             var inputText = "";
-            var numBtn = 0;
-            var buttonClicked = "";
-            var idClicked = event.target.id;
-            numBtn = idClicked[idClicked.length - 1];
-            buttonClicked = "#btn" + numBtn;
+            var numBtn = event.target.id.split("n")[1];
+            var buttonClicked = "btn" + numBtn;
             
             console.log("event target id: " + event.target.id);
-            console.log(idClicked.length);
-            console.log(idClicked[idClicked.length - 1]);
             console.log("numBtn: " + numBtn);
             console.log("buttonClicked: " + buttonClicked);
-            console.log("idClicked: " + idClicked);
-            arrayText = JSON.parse(localStorage.getItem("btn" + numBtn)) || [];
-            inputText = $(buttonClicked).prev().val();
-            // console.log(typeof arrayText);
-            // console.log(arrayText);
-            // console.log(inputText);
+            arrayText = JSON.parse(localStorage.getItem(buttonClicked)) || [];
+            inputText = $("#" + buttonClicked).prev().val();
+    
             if (inputText) {
                 arrayText.push(inputText);
-                localStorage.setItem("btn" + numBtn, JSON.stringify(arrayText));
+                localStorage.setItem(buttonClicked, JSON.stringify(arrayText));
             }
-            console.log(localStorage.getItem("btn" + numBtn));
+            console.log(localStorage.getItem(buttonClicked));
 
-            var displayArray = JSON.parse(localStorage.getItem("btn" + numBtn));
+            var displayArray = JSON.parse(localStorage.getItem(buttonClicked));
             console.log(displayArray);
-            $(buttonClicked).prev().text(displayArray);
-            // displayArray.forEach(function(textEl) {
-            //     var newLine = $("<li>").text(textEl);
-            //     console.log(newLine);
-            //     $(buttonClicked).prev().append(newLine);
-            // });
+            $("#" + buttonClicked).prev().text(displayArray);
+    
         }
     }
 
